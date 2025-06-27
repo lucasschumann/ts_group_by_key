@@ -9,15 +9,13 @@ export function groupByKey<T extends object>(
   const result = {} as GroupsMap<T>;
 
   items.forEach((el: T) => {
-    for (const k of Object.keys(el)) {
-      if (k === key) {
-        if (!(el[k] in result)) {
-          result[el[k]] = [];
-        }
+    const groupKey: string = String(el[key]);
 
-        result[el[k]].push(el);
-      }
+    if (!(groupKey in result)) {
+      result[groupKey] = [];
     }
+
+    result[groupKey].push(el);
   });
 
   return result;
